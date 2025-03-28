@@ -1,4 +1,8 @@
-def lagre_data(lon_min,lon_max,lat_min,lat_max,starttid,sluttid,type,location):    
+def lagre_data(lon_min,lon_max,lat_min,lat_max,starttid,sluttid,type,location,csv_fil,df_tidligere):  
+    import requests
+    import pandas as pd
+    import os
+
     #API-kall
     url = f"https://power.larc.nasa.gov/api/temporal/{type}/regional?parameters=ALLSKY_SFC_SW_DWN&community=SB&longitude-min={lon_min}&longitude-max={lon_max}&latitude-min={lat_min}&latitude-max={lat_max}&start={starttid}&end={sluttid}&format=JSON"
 

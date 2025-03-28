@@ -1,8 +1,12 @@
-import requests
+
 import matplotlib.pyplot as plt
-import pandas as pd
-import os
-from geopy.geocoders import Nominatim
+
+
+
+
+from hent_data import hent_data
+from plot import plot_data
+from statistikk import statistikk
 
 while True:
     print("1: Hent data")

@@ -1,4 +1,9 @@
 def hent_data():
+    from geopy.geocoders import Nominatim
+    import os
+    import pandas as pd
+    from lagre_data import lagre_data
+    import requests
     geolocator = Nominatim(user_agent="miljøanalyse_abel")
     location = geolocator.geocode(input("location: "))
     print(location.address)
@@ -22,4 +27,4 @@ def hent_data():
         print(f"Data for {location[0].split(',')[0]} finnes allerede i {csv_fil}.")
         return
     else:
-        lagre_data(lon_min,lon_max,lat_min,lat_max,starttid,sluttid,type,location)
+        lagre_data(lon_min,lon_max,lat_min,lat_max,starttid,sluttid,type,location,csv_fil,df_tidligere)
