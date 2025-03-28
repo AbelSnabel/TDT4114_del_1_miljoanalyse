@@ -18,7 +18,7 @@ def hent_data():
     lat_min, lat_max = location.latitude - 1.01, location.latitude + 1.01
 
     # CSV-fil for samlet data
-    csv_fil = r"C:\Users\Abel\repos\TDT4114_del_1_miljoanalyse\data\lokasjonsdata.csv"
+    csv_fil = r"data\lokasjonsdata.csv"
     if os.path.exists(csv_fil):
         df_tidligere = pd.read_csv(csv_fil, index_col=0, sep="\t", parse_dates=True)
     else: 

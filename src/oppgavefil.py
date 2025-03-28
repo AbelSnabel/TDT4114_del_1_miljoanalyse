@@ -1,9 +1,4 @@
-
 import matplotlib.pyplot as plt
-
-
-
-
 from hent_data import hent_data
 from plot import plot_data
 from statistikk import statistikk
