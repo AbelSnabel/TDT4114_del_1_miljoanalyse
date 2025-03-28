@@ -27,5 +27,5 @@ def lagre_data(lon_min,lon_max,lat_min,lat_max,starttid,sluttid,type,location,cs
         df_sammensatt = df
 
     #lagre df til csv
-    df_sammensatt.to_csv(csv_fil, sep="\t", encoding="utf-8")
+    df_sammensatt.to_csv(csv_fil, sep=",", encoding="utf-8")
     print(f"Data lagret i {csv_fil}")

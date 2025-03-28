@@ -20,7 +20,7 @@ def hent_data():
     # CSV-fil for samlet data
     csv_fil = r"data\lokasjonsdata.csv"
     if os.path.exists(csv_fil):
-        df_tidligere = pd.read_csv(csv_fil, index_col=0, sep="\t", parse_dates=True)
+        df_tidligere = pd.read_csv(csv_fil, index_col=0, sep=",", parse_dates=True)
     else: 
         df_tidligere = pd.DataFrame()
     if location[0].split(",")[0] in list(df_tidligere):
