@@ -3,7 +3,7 @@ def lagre_data(lon,lat,starttid,sluttid,type,location,csv_fil,df_tidligere):
     import pandas as pd
     import os
 
-    #API-kall
+    #SIDEN vi har data for solinnstrålig, er det ikke urimelig å anta at verdien er lik i området rundt
     url = f"https://power.larc.nasa.gov/api/temporal/{type}/point?parameters=ALLSKY_SFC_SW_DWN&community=SB&longitude={lon}&latitude={lat}&start={starttid}&end={sluttid}&format=JSON"
 
     response = requests.get(url)
