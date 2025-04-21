@@ -3,7 +3,9 @@ def lagre_data(lon,lat,starttid,sluttid,type,location,csv_fil,df_tidligere):
     import pandas as pd
     import os
 
-    #SIDEN vi har data for solinnstrålig, er det ikke urimelig å anta at verdien er lik i området rundt
+    #SIDEN vi har data for solinnstrålig, er det ikke urimelig å anta at verdien er lik i området rundt punktet
+    #derfor er det tilstrekkelig å hente data for ett punkt i området.
+
     url = f"https://power.larc.nasa.gov/api/temporal/{type}/point?parameters=ALLSKY_SFC_SW_DWN&community=SB&longitude={lon}&latitude={lat}&start={starttid}&end={sluttid}&format=JSON"
 
     response = requests.get(url)
@@ -17,13 +19,20 @@ def lagre_data(lon,lat,starttid,sluttid,type,location,csv_fil,df_tidligere):
     print(response.status_code)
     print(response.json())
 
+    response_json = response.json()
+
     #Henter ut data fra responsen
-    data = response.json()["features"][0]["properties"]["parameter"]["ALLSKY_SFC_SW_DWN"]
+    data = response_json["properties"]["parameter"]["ALLSKY_SFC_SW_DWN"]
 
     #Konverter data til en pandas DF
     df = pd.DataFrame(list(data.values()), index=pd.to_datetime(list(data.keys())), columns=[location[0].split(",")[0]])
 
-    #sjekk etter csv fil, og oppdater eller lagre ny data 
+    if df.isna().any().any() != 0:
+        df.interpolate(method='time', inplace=True)
+        print("data inneholder NaN verdier")
+    else:
+        print("dataen inneholder ikke NaN verdier")
+
     if os.path.exists(csv_fil):
         df_sammensatt = pd.concat([df_tidligere, df], axis=1)
     else:
