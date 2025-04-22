@@ -4,9 +4,11 @@ def prediktiv_analyse():
     from prophet.plot import plot_plotly, plot_components_plotly
     import matplotlib.pyplot as plt
 
-    #laster inn data fra df, bare de to første kolonnene, altså dato og den første byen 
-    df = pd.read_csv(r'data/lokasjonsdata.csv', usecols=[0, 2])  # Load both date and value columns
-    df.columns = ['ds', 'y']  # Rename columns to match Prophet's requirements
+    #laster inn data fra df, må velge en by
+    df = pd.read_csv(r'data\lokasjonsdata.csv') 
+    byer = df.columns[1:]
+    df = df[[df.columns[0],byer[-1+int(input(f"(tall 1-{len(byer)}){list(byer)}"))]]] 
+    df.columns = ['ds', 'y']  
 
     #skriver dato-kolonnen til rett format
     df['ds'] = pd.to_datetime(df['ds'])
