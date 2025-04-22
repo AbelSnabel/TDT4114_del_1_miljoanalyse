@@ -2,6 +2,7 @@ def hent_data():
     from geopy.geocoders import Nominatim
     import os
     import pandas as pd
+    from datetime import datetime
     from lagre_data import lagre_data
     import requests
     geolocator = Nominatim(user_agent="miljøanalyse_abel")
@@ -11,9 +12,8 @@ def hent_data():
 
     #api-parametre
     starttid = "20050101"  # YYYYMMDD
-    sluttid = "20060101"  # YYYYMMDD
+    sluttid = datetime.today().strftime("%Y%m%d")  # YYYYMMDD
     type = "daily"
-    #vi trekker fra og legger til 1.01 fordi det minste området api-en kan ta er 2x2 breddegrader
     lon = location.longitude
     lat = location.latitude
 

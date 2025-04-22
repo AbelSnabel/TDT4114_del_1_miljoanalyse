@@ -13,20 +13,19 @@ def prediktiv_analyse():
     #skriver dato-kolonnen til rett format
     df['ds'] = pd.to_datetime(df['ds'])
 
-    #initialiserer prophet modellen, med årlig sesongvariasjon
+    #initialiserer prophet modellen, med årlig og daglig sesongvariasjon
     modell = Prophet(yearly_seasonality=True,weekly_seasonality=False,daily_seasonality=True)
 
     #lag en modell til de historiske dataene
     modell.fit(df)
 
-    antall_år = 2
+    antall_år = int(input("antall år etter innhentet data man vil predikere"))
 
     #lager en dataframe for prediksjonen
     predikasjon = modell.make_future_dataframe(freq='D', periods=365*antall_år)
 
     #bruker modellen for å finne de forutsette verdiene
     forecast = modell.predict(predikasjon)
-
 
     #resten er plotting
     figur1 = modell.plot(forecast)

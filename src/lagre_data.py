@@ -17,7 +17,6 @@ def lagre_data(lon,lat,starttid,sluttid,type,location,csv_fil,df_tidligere):
         print(f"Success")
 
     print(response.status_code)
-    print(response.json())
 
     response_json = response.json()
 
@@ -27,11 +26,20 @@ def lagre_data(lon,lat,starttid,sluttid,type,location,csv_fil,df_tidligere):
     #Konverter data til en pandas DF
     df = pd.DataFrame(list(data.values()), index=pd.to_datetime(list(data.keys())), columns=[location[0].split(",")[0]])
 
+    if (df < 0).any().any():
+        print("data inneholder negative verdier")
+        df[df < 0] = 0
+        print("negative verdier er satt til 0")
+    else:
+        print("dataen inneholder ikke negative verdier")
+
     if df.isna().any().any() != 0:
         df.interpolate(method='time', inplace=True)
         print("data inneholder NaN verdier")
     else:
         print("dataen inneholder ikke NaN verdier")
+
+    
 
     if os.path.exists(csv_fil):
         df_sammensatt = pd.concat([df_tidligere, df], axis=1)
