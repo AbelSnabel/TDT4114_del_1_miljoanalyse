@@ -3,6 +3,7 @@ def hent_data():
     from geopy.geocoders import Nominatim
     import os
     import pandas as pd
+    from datetime import datetime
     from lagre_data import lagre_data
     import webbrowser
 
@@ -46,7 +47,6 @@ def hent_data():
     starttid = "20050101"
     sluttid = "20060101"
     type = "daily"
-    #vi trekker fra og legger til 1.01 fordi det minste området api-en kan ta er 2x2 breddegrader
     lon = location.longitude
     lat = location.latitude
 
