@@ -25,7 +25,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_a049f8c4fe30d19521992b159354b4c4 {
+                #map_7098354a9901db67ca10eb233117fb56 {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -39,14 +39,14 @@
 <body>
     
     
-            <div class="folium-map" id="map_a049f8c4fe30d19521992b159354b4c4" ></div>
+            <div class="folium-map" id="map_7098354a9901db67ca10eb233117fb56" ></div>
         
 </body>
 <script>
     
     
-            var map_a049f8c4fe30d19521992b159354b4c4 = L.map(
-                "map_a049f8c4fe30d19521992b159354b4c4",
+            var map_7098354a9901db67ca10eb233117fb56 = L.map(
+                "map_7098354a9901db67ca10eb233117fb56",
                 {
                     center: [20.0, 0.0],
                     crs: L.CRS.EPSG3857,
@@ -63,7 +63,7 @@
 
         
     
-            var tile_layer_eff21b38eb3e083baaa95a3ca152824a = L.tileLayer(
+            var tile_layer_e7db13d4307ee7cfa21e7015f031cfc4 = L.tileLayer(
                 "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {
   "minZoom": 0,
@@ -80,18 +80,18 @@
             );
         
     
-            tile_layer_eff21b38eb3e083baaa95a3ca152824a.addTo(map_a049f8c4fe30d19521992b159354b4c4);
+            tile_layer_e7db13d4307ee7cfa21e7015f031cfc4.addTo(map_7098354a9901db67ca10eb233117fb56);
         
     
-                var lat_lng_popup_28a19954dc8fca7bf57e46a7e733af3d = L.popup();
+                var lat_lng_popup_d91cd2396f63b71ff0ec33165f0cc490 = L.popup();
                 function latLngPop(e) {
-                    lat_lng_popup_28a19954dc8fca7bf57e46a7e733af3d
+                    lat_lng_popup_d91cd2396f63b71ff0ec33165f0cc490
                         .setLatLng(e.latlng)
                         .setContent("Latitude: " + e.latlng.lat.toFixed(4) +
                                     "<br>Longitude: " + e.latlng.lng.toFixed(4))
-                        .openOn(map_a049f8c4fe30d19521992b159354b4c4);
+                        .openOn(map_7098354a9901db67ca10eb233117fb56);
                     }
-                map_a049f8c4fe30d19521992b159354b4c4.on('click', latLngPop);
+                map_7098354a9901db67ca10eb233117fb56.on('click', latLngPop);
             
 </script>
 </html>

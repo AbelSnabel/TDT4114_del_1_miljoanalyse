@@ -6,23 +6,19 @@ def hent_data():
     from lagre_data import lagre_data
     import webbrowser
 
-    #Lager Folium-kart
-    m = folium.Map(location=[20, 0], zoom_start=2)
-    m.add_child(folium.LatLngPopup())
-    html_fil = "kart.html"
-    m.save(html_fil)
-
-    print("\nVerdenkart åpnes i firefox")
-    print("Du MÅ kopiere LATITUDE og LONGITUDE og lim dem inn når du blir bedt om det\n")
-
-    webbrowser.open(f"file://{os.path.abspath(html_fil)}")
 
     valg = input("Velg 1 for å skrive longitude og latitude, velg 2 for å skrive inn en by :)").strip()
 
     geolocator = Nominatim(user_agent="miljøanalyse_abel")
 
     if valg == "1":
-
+        m = folium.Map(location=[20, 0], zoom_start=2)
+        m.add_child(folium.LatLngPopup())
+        html_fil = "kart.html"
+        m.save(html_fil)
+        print("\nVerdenkart åpnes i firefox")
+        print("Du MÅ kopiere LATITUDE og LONGITUDE og lim dem inn når du blir bedt om det\n")
+        webbrowser.open(f"file://{os.path.abspath(html_fil)}")
         lat = float(input("Lim inn LATITUDE: "))
         lon = float(input("Lim inn LONGITUDE: "))
         location = geolocator.reverse((lat, lon))
