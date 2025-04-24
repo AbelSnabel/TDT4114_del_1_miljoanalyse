@@ -1,28 +1,20 @@
-def statistikk():
+def statistikk(by, df_1):
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
+    import plotly.express as px
 
     #leser data fra csv-fil
-    df = pd.read_csv(r'data\lokasjonsdata.csv')
+    df = df_1
+    data = df[by]
 
-    def stat(by):
-        data = df[by]
-        average = np.mean(data)
-        std_dev = np.std(data)
-        stdev_max = average + std_dev
-        stdev_min = average - std_dev
-        print(f"Gjennomsnitt for lokasjon 1: {average:.3f}")
-        print(f"Standardavvik for lokasjon 1: {std_dev:.3f}")
-        plt.plot(data)
-        plt.axhline(average, color='red', linewidth=1, label='Gjennomsnitt')
-        plt.axhline(stdev_max, color='purple', linestyle='dashed', linewidth=1, label='Standardavvik')
-        plt.axhline(stdev_min, color='purple', linestyle='dashed', linewidth=1)
-
-    print("Lagrede byer", df.columns.tolist())
-    byer = input("Skriv inn kommaseparerte byer: ")
-    for by in byer.split(","):
-        stat(by)
-
-    plt.legend()
-    plt.show()
+    average = np.mean(data)
+    std_dev = np.std(data)
+    stdev_max = average + std_dev
+    stdev_min = average - std_dev
+    fig1 = px.line(data, title=f"Statistikk for {by}", labels={'value': 'Antall', 'index': 'Tid'})
+    fig1.add_hline(y=average, line_color='red', annotation_text="Gjennomsnitt", annotation_position="top left")
+    fig1.add_hline(y=stdev_max, line_color='green', annotation_text="Stdev max", annotation_position="top left")
+    fig1.add_hline(y=stdev_min, line_color='blue', annotation_text="Stdev min", annotation_position="top left")
+    fig1.update_layout(xaxis_title="Tid", yaxis_title="Antall")
+    return fig1
