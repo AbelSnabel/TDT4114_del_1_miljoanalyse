@@ -1,14 +1,15 @@
-def prediktiv_analyse():
+def prediktiv_analyse(antall_år, by, df_1):
     import pandas as pd
     from prophet import Prophet
     from prophet.plot import plot_plotly, plot_components_plotly
     import matplotlib.pyplot as plt
+    print(df_1.head())
 
     #laster inn data fra df, må velge en by
-    df = pd.read_csv(r'data\lokasjonsdata.csv') 
-    byer = df.columns[1:]
-    df = df[[df.columns[0],byer[-1+int(input(f"(tall 1-{len(byer)}){list(byer)}"))]]] 
-    df.columns = ['ds', 'y']  
+    df = df_1  # Explicitly create a copy
+    df.columns = ['ds', 'y']
+
+    df['y'] = pd.to_numeric(df['y'], errors='coerce')
 
     #skriver dato-kolonnen til rett format
     df['ds'] = pd.to_datetime(df['ds'])
@@ -19,20 +20,10 @@ def prediktiv_analyse():
     #lag en modell til de historiske dataene
     modell.fit(df)
 
-    antall_år = int(input("antall år etter innhentet data man vil predikere"))
-
     #lager en dataframe for prediksjonen
     predikasjon = modell.make_future_dataframe(freq='D', periods=365*antall_år)
 
     #bruker modellen for å finne de forutsette verdiene
     forecast = modell.predict(predikasjon)
 
-    #resten er plotting
-    figur1 = modell.plot(forecast)
-    figur2 = modell.plot_components(forecast)
-
-    plot_plotly(modell, forecast)
-    plot_components_plotly(modell, forecast)
-
-    plt.legend()
-    plt.show()
+    return modell, forecast
