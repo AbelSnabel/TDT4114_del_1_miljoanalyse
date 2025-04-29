@@ -1,4 +1,4 @@
-def hent_data():
+def hent_data(input,starttid,sluttid):
     import folium
     from geopy.geocoders import Nominatim
     import os
@@ -8,44 +8,20 @@ def hent_data():
     import webbrowser
 
 
-    valg = input("Velg 1 for å skrive longitude og latitude, velg 2 for å skrive inn en by :)").strip()
+    valg = input
 
     geolocator = Nominatim(user_agent="miljøanalyse_abel")
 
-    if valg == "1":
-        m = folium.Map(location=[20, 0], zoom_start=2)
-        m.add_child(folium.LatLngPopup())
-        html_fil = "kart.html"
-        m.save(html_fil)
-        print("\nVerdenkart åpnes i firefox")
-        print("Du MÅ kopiere LATITUDE og LONGITUDE og lim dem inn når du blir bedt om det\n")
-        webbrowser.open(f"file://{os.path.abspath(html_fil)}")
-        lat = float(input("Lim inn LATITUDE: "))
-        lon = float(input("Lim inn LONGITUDE: "))
-        location = geolocator.reverse((lat, lon))
-    elif valg == "2":
-        by = input("Skriv inn navnet på byen: ").strip()
-        location = geolocator.geocode(by)
-        if not location:
-            print("Stedet finne ikke :(")
-            return
-        lon, lat = location.longitude, location.latitude
-
-
-    else:
-        print("Ugyldig valg. Avslutter...")
-        return
-
+    location = geolocator.geocode(by)
     if not location:
         print("Stedet finne ikke :(")
         return
-
-    print("Valgt sted:", location.address)
+    lon, lat = location.longitude, location.latitude
 
 
     #API-parametre
-    starttid = "20050101"
-    sluttid = "20060101"
+    starttid = "starttid"
+    sluttid = "slutttid"
     type = "daily"
     lon = location.longitude
     lat = location.latitude
