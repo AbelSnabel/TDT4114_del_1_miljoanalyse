@@ -28,7 +28,7 @@ def lagre_data(lon,lat,starttid,sluttid,type,location,csv_fil,df_tidligere):
 
     if (df < 0).any().any():
         print("data inneholder negative verdier")
-        df[df < 0] = 0
+        df[df < 0] = None
         print("negative verdier er satt til 0")
     else:
         print("dataen inneholder ikke negative verdier")
