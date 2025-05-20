@@ -1,15 +1,13 @@
-import pandas as pd
-import matplotlib.pyplot as plt
+def plot_data(by, df):
 
-def plot_data():
-    df = pd.read_csv(r'data\lokasjonsdata.csv', index_col=0, parse_dates=True)
-    
-    for column in df.columns:
-        plt.plot(df.index, df[column], label=column)
-    
-    plt.xlabel("datoer")
-    plt.ylabel("solstråling(kwh/m^2)")
-    plt.title("Graf over solstråling på lokasjonene")
-    plt.legend()
-    plt.grid()
-    plt.show()
+    import pandas as pd
+    import plotly.express as px
+
+    city_data = df[f'{by}']
+
+    fig = px.line(city_data, 
+                x=city_data.index, 
+                y=city_data.values, 
+                labels={'x': 'datoer', 'y': 'solstråling(kwh/m^2)'}, 
+    )
+    return fig
