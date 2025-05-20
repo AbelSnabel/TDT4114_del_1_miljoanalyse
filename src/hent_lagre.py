@@ -6,6 +6,9 @@ def hent(lat, long, starttid, sluttid, df_tidligere):
 
     geolocator = Nominatim(user_agent="miljøanalyse_abel")
     location = geolocator.reverse((lat, long))
+    if location is None:
+        print("Ingen lokasjon funnet.")
+        return
     address = location.raw.get('address', {})
     stedsnavn = (
         address.get('city') or address.get('town') or address.get('village') or address.get('municipality') 

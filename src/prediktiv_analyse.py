@@ -1,11 +1,9 @@
-def prediktiv_analyse(antall_år, by, df_1):
+def prediktiv_analyse(antall_år, df):
     import pandas as pd
     from prophet import Prophet
-    from prophet.plot import plot_plotly, plot_components_plotly
-    import matplotlib.pyplot as plt
+    from prophet.plot import plot_plotly
 
     #laster inn data fra df, må velge en by
-    df = df_1  # Explicitly create a copy
     df.columns = ['ds', 'y']
 
     df.loc[:, 'y'] = pd.to_numeric(df['y'], errors='coerce')
@@ -23,4 +21,6 @@ def prediktiv_analyse(antall_år, by, df_1):
     #bruker modellen for å finne de forutsette verdiene
     forecast = modell.predict(predikasjon)
 
-    return modell, forecast
+    fig = plot_plotly(modell, forecast)
+    
+    return fig

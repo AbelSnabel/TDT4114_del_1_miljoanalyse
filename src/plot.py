@@ -1,3 +1,4 @@
+#plotter dataene med plotly, og returnerer en figur
 def plot_data(by, df):
 
     import pandas as pd

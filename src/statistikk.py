@@ -8,6 +8,7 @@ def statistikk(by, df_1):
     df = df_1
     data = df[by]
 
+    #finner diverse statistiske mål
     average = np.mean(data)
     std_dev = np.std(data)
     stdev_max = average + std_dev
