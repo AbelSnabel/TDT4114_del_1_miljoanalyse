@@ -1,4 +1,4 @@
-def hent(lat, long, starttid, sluttid, df_tidligere):
+def hent(lat, long, starttid, sluttid, csv_fil):
     import requests
     from geopy.geocoders import Nominatim
     import pandas as pd
@@ -16,7 +16,6 @@ def hent(lat, long, starttid, sluttid, df_tidligere):
     )
     #legger til koordinater i stedsnanvet, gjorde det lettere å håndtere flere trykk på samme sted
     stedsnavn = f"{stedsnavn} ({lat:.1f},{long:.1f})"
-    csv_fil = r'../data/lokasjonsdata.csv'
 
     url = f"https://power.larc.nasa.gov/api/temporal/daily/point?parameters=ALLSKY_SFC_SW_DWN&community=SB&longitude={long}&latitude={lat}&start={starttid}&end={sluttid}&format=JSON"
 
